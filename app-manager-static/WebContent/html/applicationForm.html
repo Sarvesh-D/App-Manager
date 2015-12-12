@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Application Form</title>
+</head>
+<body>
+
+	<div class="container">
+		
+			<div class="alert alert-success">Welcome {{loggedUser}}</div>
+			
+			<div class="panel-group">
+				<div class="panel panel-primary">
+					<div class="panel-heading">Application Form</div>
+					<div class="panel-body">
+						<form name="appForm" novalidate ng-model-options="{updateOn: 'blur'}" role="form">
+							<div class="row">
+								<div class="col-md-8">
+									<div class="row">
+										<div class="col-md-6">
+											<label for="applicationName">Application Name</label>
+										</div>
+										<div class="col-md-6">
+											<input type="text" id="applicationName" ng-model="app.name" name="appName" required class="form-control"/>
+											<span class="formError" ng-show="appForm.$submitted || appForm.appName.$touched ">
+												<span ng-show="appForm.appName.$error.required">Application Name is mandatory</span>
+											</span>	
+										</div>
+									</div> <br>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="applicationDesc">Application Description</label>
+										</div>
+										<div class="col-md-6">
+											<input type="text" id="applicationDesc" ng-model="app.desc" name="appDesc" required class="form-control"/>
+											<span class="formError" ng-show="appForm.$submitted || appForm.appDesc.$touched">
+												<span ng-show="appForm.appDesc.$error.required">Application Description is mandatory</span>
+											</span>	
+										</div>
+									</div> <br>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="applicationLaunch">Application Launch Date</label>
+										</div>
+										<div class="col-md-6">
+											<input type="date" id="applicationLaunch" ng-model="app.launch" name="appLaunch" required class="form-control"/>
+											<span class="formError" ng-show="appForm.$submitted || appForm.appLaunch.$touched">
+												<span ng-show="appForm.appLaunch.$error.required">Application Launch Date is mandatory</span>
+											</span>	
+										</div>
+									</div> <br>
+									<div class="row">
+										<div class="col-md-6">
+											<label for="isLive">Is Live</label>
+										</div>
+										<div class="col-md-6">
+											<input type="checkbox" id="isLive" ng-model="app.live" name="isLive"/>	
+										</div>
+									</div> <br>
+									
+									<div class="row">
+										<div class="col-md-6">
+											<div class="row">
+												<div class="col-md-3">
+													<input  type="button"  value="Clear" ng-click="clear(appForm)" class="btn btn-primary"/>
+												</div>
+												<div class="col-md-3">
+													<input  type="button"  value="Reset" ng-click="reset(appForm)" class="btn btn-primary"/>
+												</div>
+												<div class="col-md-3">
+													<input  type="button"  value="Update" ng-click="update()" class="btn btn-primary"/>
+												</div>
+												<div class="col-md-3">
+													<input  type="button"  value="Save" ng-hide="appForm.$invalid" ng-click="save(appForm)" class="btn btn-primary"/>
+												</div>
+											</div>
+										</div>
+									</div> <br>
+								
+									<div class="row">
+										<div class="col-md-2">
+											<input  type="button"  value="Get Apps" ng-click="getApps()" class="btn btn-primary"/>		
+										</div>
+										<div class="col-md-2">
+											<input  type="button"  value="Get App By ID" ng-click="getApp(applicationId)" class="btn btn-primary"/>
+										</div>
+										<div class="col-md-4">
+											<input ng-model-options="{updateOn: 'default'}" type="number" name="appId" ng-model="applicationId" style="width:100px;" class="form-control"/>
+										</div>
+									</div> <br>
+								
+									<pre>Current Data : {{app | json}}</pre>
+									<pre>Saved Data : {{savedApp | json}}</pre>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			
+				<div class="panel panel-info">
+					<div class="panel-heading">Application Details</div>
+					<div class="panel-body">
+						<div class="table-responsive">
+							<table class="table">
+								<thead>
+									<tr>
+										<th>Sr No.</th>
+										<th>Application Name</th>
+										<th>Application Desc</th>
+										<th>Application Launch</th>
+										<th>Is Live</th>
+										<th>Action</th>
+									</tr>
+								</thead>
+								<tr ng-repeat="application in applications" ng-class="{true:'success',false:'danger'}[application.live]">
+									<td>{{application.id}}</td>
+									<td>{{application.name}}</td>
+									<td>{{application.desc}}</td>
+									<td>{{application.launch | date:'dd-MM-yyyy'}}</td>
+									<td>{{application.live}}</td>
+									<td>
+										<button class="btn btn-info">Update</button>
+										<button class="btn btn-danger">Delete</button>
+									</td>
+								</tr>
+							</table>
+						</div>
+						<div class="alert alert-danger" ng-show="noApp"><h5 align="center">No Application found with id {{applicationId}}</h5></div>
+					</div>
+				</div>
+			</div>
+		</div>
+</body>
+</html>
