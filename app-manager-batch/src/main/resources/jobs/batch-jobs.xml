@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:batch="http://www.springframework.org/schema/batch"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd">
+
+	<bean id="app" class="com.ds.appmanager.model.ApplicationView" scope="prototype"/>
+
+	<batch:job id="insertAppsJob">
+		<batch:step id="insertApps">
+			<batch:tasklet>
+				<batch:chunk reader="appReader" processor="appProcessor" writer="appWriter" commit-interval="2"/>
+			</batch:tasklet>
+		</batch:step>
+	</batch:job>
+	
+	<!-- Reader -->
+	<bean id="appReader" class="org.springframework.batch.item.file.FlatFileItemReader">
+		<property name="resource" value="classpath:input/apps.csv" />
+		<property name="lineMapper">
+			<bean class="org.springframework.batch.item.file.mapping.DefaultLineMapper">
+				<property name="lineTokenizer">
+					<bean class="org.springframework.batch.item.file.transform.DelimitedLineTokenizer">
+						<property name="names" value="applicationName,applicationDesc,applicationLaunch,live" />
+					</bean>
+				</property>
+				<property name="fieldSetMapper">
+					<bean class="org.springframework.batch.item.file.mapping.BeanWrapperFieldSetMapper">
+						<property name="prototypeBeanName" value="app" />
+					</bean>
+				</property>
+			</bean>
+		</property>
+	</bean>
+	
+	<!-- Writer -->
+	<bean id="appWriter" class="com.ds.appmanager.batch.writer.AppWriter" />
+	
+	<!-- Processor  -->
+	<bean id="appProcessor" class="com.ds.appmanager.batch.processor.AppProcessor" />
+</beans>
