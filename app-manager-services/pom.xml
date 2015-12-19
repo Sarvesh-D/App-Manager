@@ -165,7 +165,7 @@
 			<artifactId>dozer-spring</artifactId>
 			<version>${dozer.version}</version>
 		</dependency>
-
+		<!-- Required for hibernate template initialisation -->
 		<dependency>
 			<groupId>javassist</groupId>
 			<artifactId>javassist</artifactId>
