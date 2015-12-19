@@ -12,7 +12,7 @@
 	<batch:job id="insertAppsJob">
 		<batch:step id="insertApps">
 			<batch:tasklet>
-				<batch:chunk reader="appReader" processor="appProcessor" writer="appWriter" commit-interval="5" skip-limit="10">
+				<batch:chunk reader="appReader" processor="appProcessor" writer="appWriter" commit-interval="5" skip-limit="15">
 					<batch:skippable-exception-classes>
 						<batch:include class="com.ds.appmanager.batch.exceptions.InvalidRecordException"/>
 					</batch:skippable-exception-classes>
