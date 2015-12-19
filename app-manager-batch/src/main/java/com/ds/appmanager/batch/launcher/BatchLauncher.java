@@ -1,5 +1,7 @@
 package com.ds.appmanager.batch.launcher;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.batch.core.Job;
 import org.springframework.batch.core.JobExecution;
 import org.springframework.batch.core.JobParameters;
@@ -8,6 +10,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class BatchLauncher {
+	
+	private static final Logger LOG = LoggerFactory.getLogger(BatchLauncher.class);
 	
 	public static void main(String[] args) {
 		String[] springConfigs = {
@@ -22,11 +26,15 @@ public class BatchLauncher {
 		
 		Job job = (Job) context.getBean("insertAppsJob");
 		
+		JobExecution execution = null;
+		
 		try {
-			JobExecution execution = jobLauncher.run(job, new JobParameters());
-			System.out.println(execution.getStatus());
+			LOG.info("Starting Job {}",job.getName());
+			execution = jobLauncher.run(job, new JobParameters());
 		} catch (Exception e) {
 			e.printStackTrace();
+		} finally {
+			LOG.info("Job {} completed with status {}",job.getName(),execution.getStatus());
 		}
 		
 	}

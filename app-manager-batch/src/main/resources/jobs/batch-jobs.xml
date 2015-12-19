@@ -5,12 +5,24 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd">
 
+	<import resource="../config/persistence.xml"/>
+
 	<bean id="app" class="com.ds.appmanager.model.ApplicationView" scope="prototype"/>
 
 	<batch:job id="insertAppsJob">
 		<batch:step id="insertApps">
 			<batch:tasklet>
-				<batch:chunk reader="appReader" processor="appProcessor" writer="appWriter" commit-interval="2"/>
+				<batch:chunk reader="appReader" processor="appProcessor" writer="appWriter" commit-interval="5" skip-limit="10">
+					<batch:skippable-exception-classes>
+						<batch:include class="com.ds.appmanager.batch.exceptions.InvalidRecordException"/>
+					</batch:skippable-exception-classes>
+					<batch:listeners>
+						<!-- <batch:listener ref="itemReadListener" /> -->
+						<batch:listener ref="itemProcessListener" />
+						<batch:listener ref="itemWriteListener" />
+						<batch:listener ref="stepExecListener" />
+					</batch:listeners>
+				</batch:chunk>
 			</batch:tasklet>
 		</batch:step>
 	</batch:job>
@@ -39,4 +51,14 @@
 	
 	<!-- Processor  -->
 	<bean id="appProcessor" class="com.ds.appmanager.batch.processor.AppProcessor" />
+	
+	<!-- Listeners -->
+	<bean id="itemWriteListener" class="com.ds.appmanager.batch.listeners.AfterAppWriteListener">
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="itemReadListener" class="com.ds.appmanager.batch.listeners.AfterAppReadListener" />
+	<bean id="itemProcessListener" class="com.ds.appmanager.batch.listeners.AfterAppProcessListener" >
+		<property name="hibernateTemplate" ref="hibernateTemplate" />
+	</bean>
+	<bean id="stepExecListener" class="com.ds.appmanager.batch.listeners.AfterStepListener" />
 </beans>

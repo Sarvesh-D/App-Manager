@@ -23,7 +23,7 @@
 
 	
 	<!-- Application Loggers -->
-	<logger name="com.ds">
+	<logger name="com.ds.appmanager.batch">
 		<level value="debug" />
 		<appender-ref ref="file"/>
 	</logger>
