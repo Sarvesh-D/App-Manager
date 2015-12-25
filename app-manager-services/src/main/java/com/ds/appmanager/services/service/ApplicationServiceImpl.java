@@ -47,9 +47,9 @@ public class ApplicationServiceImpl implements ApplicationService {
 	}
 
 	@Override
-	public boolean deleteApplication(ApplicationView applicationView) {
-		Application application = mapper.map(applicationView, Application.class);
-		return applicationDao.deleteApplication(application);
+	public boolean deleteApplication(int applicationId) {
+		//Application application = mapper.map(applicationView, Application.class);
+		return applicationDao.deleteApplication(applicationId);
 	}
 
 	@Override

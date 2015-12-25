@@ -20,7 +20,7 @@ public class CorsInterceptor implements HandlerInterceptor {
 		response.setHeader(CREDENTIALS_NAME, "true");
 		response.setHeader(ORIGIN_NAME, "http://localhost:8080");
 		response.setHeader(METHODS_NAME, "GET, OPTIONS, POST, PUT, DELETE");
-		response.setHeader(HEADERS_NAME, "Origin, X-Requested-With, Content-Type, Accept");
+		response.setHeader(HEADERS_NAME, "Origin, X-Requested-With, Content-Type, Accept, Authorization");
 		response.setHeader(MAX_AGE_NAME, "3600");
 		System.out.println("In PreHandle...");
 		return true;

@@ -11,6 +11,7 @@ function resetFormErrors(form) {
 
 function configReqAppObj(app) {
 	var reqObj = {
+			applicationId : app.id,
 			applicationName : app.name, 
 			applicationDesc : app.desc,
 			applicationLaunch : app.launch,
@@ -24,7 +25,7 @@ function configRespAppObj(app) {
 			id : app.applicationId,
 			name : app.applicationName, 
 			desc : app.applicationDesc,
-			launch : app.applicationLaunch,
+			launch : new Date(app.applicationLaunch),
 			live : app.live
 	};
 	return uiApp;

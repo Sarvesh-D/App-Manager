@@ -33,7 +33,7 @@ public interface ApplicationService {
 	 * @param application to be deleted
 	 * @return boolean depending on whether the application was delted or not
 	 */
-	boolean deleteApplication(ApplicationView application);
+	boolean deleteApplication(int applicationId);
 
 	List<ApplicationView> getAllApplications();
 	

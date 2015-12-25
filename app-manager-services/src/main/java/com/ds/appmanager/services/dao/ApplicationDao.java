@@ -37,7 +37,7 @@ public interface ApplicationDao {
 	 * @param application to be deleted
 	 * @return boolean depending on whether the application was delted or not
 	 */
-	boolean deleteApplication(Application application);
+	boolean deleteApplication(int applicationId);
 
 	List<Application> getAllApplications();
 	

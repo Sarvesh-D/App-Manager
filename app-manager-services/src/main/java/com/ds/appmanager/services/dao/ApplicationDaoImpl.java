@@ -36,21 +36,28 @@ public class ApplicationDaoImpl implements ApplicationDao {
 
 	@Override
 	public boolean updateApplication(Application application) {
-		Application applicationToUpdate = hibernateTemplate.get(Application.class, application.getApplicationId());
-		applicationToUpdate.setApplicationDesc("Updated App");
-		return addApplication(applicationToUpdate);
+		try {
+			hibernateTemplate.update(application);
+			return true;
+		} catch (DataAccessException e) {
+			return false;
+		}
 	}
 
 	@Override
-	public boolean deleteApplication(Application application) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean deleteApplication(int applicationId) {
+		try {
+			hibernateTemplate.delete(hibernateTemplate.get(Application.class, applicationId));
+			return true;
+		} catch (DataAccessException e) {
+			return false;
+		}
 	}
 
 	@Override
 	public List<Application> getAllApplications() {
 		final String query = "FROM Application";
-		return hibernateTemplate.find(query);
+		return (List<Application>) hibernateTemplate.find(query);
 	}
 
 	@Override

@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Application Form</title>
-</head>
-<body>
-
-	<div class="container">
-		
-			<div class="alert alert-success">Welcome {{loggedUser}}</div>
-			
-			<div class="panel-group">
-				<div class="panel panel-primary">
+<div class="panel panel-primary">
 					<div class="panel-heading">Application Form</div>
 					<div class="panel-body">
 						<form name="appForm" novalidate ng-model-options="{updateOn: 'blur'}" role="form">
@@ -65,71 +52,23 @@
 												<div class="col-md-3">
 													<input  type="button"  value="Clear" ng-click="clear(appForm)" class="btn btn-primary"/>
 												</div>
-												<div class="col-md-3">
+												<!-- <div class="col-md-3">
 													<input  type="button"  value="Reset" ng-click="reset(appForm)" class="btn btn-primary"/>
-												</div>
-												<div class="col-md-3">
+												</div> -->
+												<!-- <div class="col-md-3">
 													<input  type="button"  value="Update" ng-click="update()" class="btn btn-primary"/>
-												</div>
+												</div> -->
 												<div class="col-md-3">
 													<input  type="button"  value="Save" ng-hide="appForm.$invalid" ng-click="save(appForm)" class="btn btn-primary"/>
 												</div>
 											</div>
 										</div>
 									</div> <br>
-								
-									<div class="row">
-										<div class="col-md-2">
-											<input  type="button"  value="Get Apps" ng-click="getApps()" class="btn btn-primary"/>		
-										</div>
-										<div class="col-md-2">
-											<input  type="button"  value="Get App By ID" ng-click="getApp(applicationId)" class="btn btn-primary"/>
-										</div>
-										<div class="col-md-4">
-											<input ng-model-options="{updateOn: 'default'}" type="number" name="appId" ng-model="applicationId" style="width:100px;" class="form-control"/>
-										</div>
-									</div> <br>
-								
-									<pre>Current Data : {{app | json}}</pre>
-									<pre>Saved Data : {{savedApp | json}}</pre>
+
+									<!-- <pre>Current Data : {{app | json}}</pre>
+									<pre>Saved Data : {{savedApp | json}}</pre> -->
 								</div>
 							</div>
 						</form>
 					</div>
 				</div>
-			
-				<div class="panel panel-info">
-					<div class="panel-heading">Application Details</div>
-					<div class="panel-body">
-						<div class="table-responsive">
-							<table class="table">
-								<thead>
-									<tr>
-										<th>Sr No.</th>
-										<th>Application Name</th>
-										<th>Application Desc</th>
-										<th>Application Launch</th>
-										<th>Is Live</th>
-										<th>Action</th>
-									</tr>
-								</thead>
-								<tr ng-repeat="application in applications" ng-class="{true:'success',false:'danger'}[application.live]">
-									<td>{{application.id}}</td>
-									<td>{{application.name}}</td>
-									<td>{{application.desc}}</td>
-									<td>{{application.launch | date:'dd-MM-yyyy'}}</td>
-									<td>{{application.live}}</td>
-									<td>
-										<button class="btn btn-info">Update</button>
-										<button class="btn btn-danger">Delete</button>
-									</td>
-								</tr>
-							</table>
-						</div>
-						<div class="alert alert-danger" ng-show="noApp"><h5 align="center">No Application found with id {{applicationId}}</h5></div>
-					</div>
-				</div>
-			</div>
-		</div>
-</body>
-</html>

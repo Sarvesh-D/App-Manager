@@ -2,25 +2,19 @@
  * JS for controllers 
  */
 
-appModule.controller('applicationController' , function($scope,$http,$routeParams,$window,appManagerServices) {
+appModule.controller('applicationController' , function($scope,$http,$routeParams,$uibModal,appManagerServices) {
 	$scope.app = {};
-	$scope.savedApp = {};
 	$scope.applications = [];
 	
-	//$scope.loggedUser = $window.sessionStorage.getItem('userName');
 	$scope.loggedUser = $routeParams.user;
 	
 	$scope.clear = function(form) {
 		$scope.app = {};
-		$scope.savedApp = {};
 		resetFormErrors(form);
 	};
 	$scope.reset = function(form) {
 		$scope.app = angular.copy($scope.savedApp);
 		resetFormErrors(form);
-	};
-	$scope.update = function() {
-		$scope.savedApp = angular.copy($scope.app);
 	};
 	
 	/**
@@ -41,7 +35,7 @@ appModule.controller('applicationController' , function($scope,$http,$routeParam
 	
 	$scope.getApp = function(applicationId) {
 		if(null != applicationId) {
-			var app = appManagerServices.get({app:$scope.applicationId} , function() {
+			var app = appManagerServices.get({app:applicationId} , function(res) {
 				$scope.applications = [];
 				if(null != app.applicationId) {
 					$scope.noApp = false;
@@ -50,7 +44,8 @@ appModule.controller('applicationController' , function($scope,$http,$routeParam
 				} else {
 					$scope.noApp = true;
 				}
-			});
+			}
+			);
 		} else {
 			alert('Enter Application ID');
 		}
@@ -62,19 +57,64 @@ appModule.controller('applicationController' , function($scope,$http,$routeParam
 		$scope.applications.push(configAppForUI(angular.copy($scope.app)));
 		$scope.app = {};
 		resetFormErrors(form);
+	};
+	
+	$scope.update = function(applicationId) {
+		$uibModal.open({
+			templateUrl: "html/applicationForm.html",
+			controller: "updateController",
+			resolve: {
+				applicationId: applicationId
+			}
+		});
+	}
+	
+	$scope.deleteApp = function(applicationId) {
+		$uibModal.open({
+			templateUrl: "deleteConfirmation.html",
+			controller: "deleteController",
+			resolve: {
+				applicationId: applicationId
+			}
+		})
 	}
 });
 
-appModule.controller('loginController', function($scope,$http,$window) {
+appModule.controller('loginController', function($scope,$window) {
 	
 	$scope.login = function(userName,password) {
 		if(userName === 'root' && password === 'root') {
 			alert('Welcome');
-			//$window.sessionStorage.setItem('userName', userName);
 			$window.location.href = "#home/"+userName;
 		} else {
 			alert('Invalid user');
 		}
 	}
 	
+});
+
+appModule.controller('updateController', function($scope,$uibModalInstance,appManagerServices,applicationId) {
+	$scope.app = {};
+	// GET the application which needs to be updated
+	appManagerServices.get({app:applicationId},function(app) {
+		$scope.app = configRespAppObj(app);
+	});
+	// UPDATE the application
+	$scope.save = function(form) {
+		var reqObj = configReqAppObj(angular.copy($scope.app));
+		var application = appManagerServices.update(reqObj);
+		$uibModalInstance.dismiss();
+		resetFormErrors(form);
+	}
+});
+
+appModule.controller('deleteController', function($scope,$uibModalInstance,appManagerServices,applicationId) {
+	// DELETE the app
+	$scope.remove = function() {
+		appManagerServices.remove({app:applicationId});
+		$uibModalInstance.dismiss();
+	}
+	$scope.cancel = function() {
+		$uibModalInstance.dismiss();
+	}
 });

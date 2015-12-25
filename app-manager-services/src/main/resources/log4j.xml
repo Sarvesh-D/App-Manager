@@ -23,7 +23,7 @@
 
 	
 	<!-- Application Loggers -->
-	<logger name="com.sarvesh.ams">
+	<logger name="com.ds.appmanager">
 		<level value="debug" />
 		<appender-ref ref="file"/>
 	</logger>

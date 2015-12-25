@@ -19,7 +19,6 @@ import com.ds.appmanager.model.ApplicationView;
 import com.ds.appmanager.services.exceptions.ApplicationException;
 import com.ds.appmanager.services.service.ApplicationService;
 
-
 @Controller
 public class ApplicationController {
 	
@@ -28,11 +27,6 @@ public class ApplicationController {
 	private ApplicationService applicationService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(ApplicationController.class);
-	
-	@RequestMapping(value="/index" , method=RequestMethod.GET)
-	public String login() {
-		return "redirect:/html/index.html";
-	}
 	
 	/**
 	 * Add application in the system
@@ -50,7 +44,6 @@ public class ApplicationController {
 	 * @return
 	 * @throws ApplicationException
 	 */
-	
 	@RequestMapping(value="/applications" , method=RequestMethod.GET)
 	public @ResponseBody List<ApplicationView> getAllApplications() throws ApplicationException {
 		return applicationService.getAllApplications();
@@ -66,6 +59,27 @@ public class ApplicationController {
 		return applicationService.getApplication(applicationId);
 	}
 	
+	/**
+	 * Update application in the system
+	 * @param applicationView
+	 * @return
+	 */
+	@RequestMapping(value="/applications" , method=RequestMethod.PUT)
+	public @ResponseBody ApplicationView updateApplication(@RequestBody ApplicationView applicationView) {
+		applicationService.updateApplication(applicationView);
+		return applicationView;
+	}
+	
+	/**
+	 * Delete application in the system
+	 * @param applicationView
+	 * @return
+	 */
+	@RequestMapping(value="/applications/{applicationId}" , method=RequestMethod.DELETE)
+	public @ResponseBody void deleteApplication(@PathVariable int applicationId) {
+		applicationService.deleteApplication(applicationId);
+	}
+	
 	// TODO FOR TESTING ERROR.JSP NOT RENDERING ISSUE
 	/*@RequestMapping(value="/get")
 	public String getAllApplications() throws ApplicationException {
@@ -75,6 +89,7 @@ public class ApplicationController {
 	
 	@ExceptionHandler(value = Exception.class)
 	public static ModelAndView redirectOnException(Exception e) {
+		logger.error("Following error occured while processing request : {}",e.getMessage());
 		ModelAndView mv = new ModelAndView("error");
 		mv.addObject("errMsg", e.getMessage());
 		return mv;

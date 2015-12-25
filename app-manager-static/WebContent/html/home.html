@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Application Form</title>
+</head>
+<body>
+
+	<div class="container">
+		
+			<div class="alert alert-success">Welcome {{loggedUser}}</div>
+			
+			<div class="panel-group">
+				
+				<div ng-include="'html/applicationForm.html'"></div>
+				
+				<div ng-include="'html/applicationDetails.html'"></div>
+				
+			</div>
+		</div>
+</body>
+</html>
