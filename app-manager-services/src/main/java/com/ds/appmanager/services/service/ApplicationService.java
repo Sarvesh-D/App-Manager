@@ -37,6 +37,6 @@ public interface ApplicationService {
 
 	List<ApplicationView> getAllApplications();
 	
-	ApplicationView getApplication(Integer applicationId);
+	ApplicationView getApplication(int applicationId);
 
 }

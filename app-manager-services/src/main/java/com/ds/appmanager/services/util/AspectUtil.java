@@ -7,8 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.transaction.NoTransactionException;
 import org.springframework.transaction.support.TransactionSynchronizationManager;
 
-import com.ds.appmanager.services.exceptions.ApplicationException;
-
 public class AspectUtil {
 
 	private static final Logger logger = LoggerFactory.getLogger(AspectUtil.class); 

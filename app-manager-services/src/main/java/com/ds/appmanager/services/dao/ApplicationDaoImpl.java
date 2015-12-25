@@ -61,7 +61,7 @@ public class ApplicationDaoImpl implements ApplicationDao {
 	}
 
 	@Override
-	public Application getApplication(Integer applicationId) {
+	public Application getApplication(int applicationId) {
 		return hibernateTemplate.get(Application.class, applicationId);
 	}
 

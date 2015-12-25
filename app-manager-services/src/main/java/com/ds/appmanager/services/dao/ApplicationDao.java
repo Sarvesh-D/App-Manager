@@ -41,6 +41,6 @@ public interface ApplicationDao {
 
 	List<Application> getAllApplications();
 	
-	Application getApplication(Integer applicationId);
+	Application getApplication(int applicationId);
 
 }

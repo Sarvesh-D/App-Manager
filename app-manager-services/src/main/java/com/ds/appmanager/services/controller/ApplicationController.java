@@ -55,7 +55,7 @@ public class ApplicationController {
 	 * @return
 	 */
 	@RequestMapping(value="/applications/{applicationId}" , method=RequestMethod.GET)
-	public @ResponseBody ApplicationView getApplication(@PathVariable Integer applicationId) {
+	public @ResponseBody ApplicationView getApplication(@PathVariable int applicationId) {
 		return applicationService.getApplication(applicationId);
 	}
 	

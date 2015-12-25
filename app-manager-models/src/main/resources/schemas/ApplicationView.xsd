@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/ApplicationView"
+	xmlns:tns="http://www.example.org/ApplicationView" elementFormDefault="qualified">
+
+	<element name="ApplicationView">
+		<complexType>
+			<sequence>
+				<element name="applicationId" type="int" />
+				<element name="applicationName" type="string" />
+				<element name="applicationDesc" type="string" />
+				<element name="applicationLaunch" type="date" />
+				<element name="live" type="boolean" />
+			</sequence>
+		</complexType>
+	</element>
+
+</schema>

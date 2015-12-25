@@ -65,7 +65,7 @@ public class ApplicationServiceImpl implements ApplicationService {
 	}
 
 	@Override
-	public ApplicationView getApplication(Integer applicationId) {
+	public ApplicationView getApplication(int applicationId) {
 		if(null != applicationDao.getApplication(applicationId)) {
 			return mapper.map(applicationDao.getApplication(applicationId), ApplicationView.class);
 		} else {

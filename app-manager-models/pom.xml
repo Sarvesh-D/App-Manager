@@ -1,11 +1,42 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-  <artifactId>app-manager-models</artifactId>
-  <name>App Manager Models</name>
-  <parent>
-  	<groupId>com.distinctschooling</groupId>
-  	<artifactId>app-manager-parent</artifactId>
-  	<version>1.0-SNAPSHOT</version>
-  	<relativePath>../app-manager-parent</relativePath>
-  </parent>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>app-manager-models</artifactId>
+	<name>App Manager Models</name>
+	<parent>
+		<groupId>com.distinctschooling</groupId>
+		<artifactId>app-manager-parent</artifactId>
+		<version>1.0-SNAPSHOT</version>
+		<relativePath>../app-manager-parent</relativePath>
+	</parent>
+
+	<properties>
+		<schema.dir>src/main/resources/schemas</schema.dir>
+		<model.package>com.ds.appmanager.model</model.package>
+	</properties>
+	<build>
+		<plugins>
+			<!-- Plugin required to build java classes from XSD using XJC -->
+			<plugin>
+				<groupId>org.codehaus.mojo</groupId>
+				<artifactId>jaxb2-maven-plugin</artifactId>
+				<version>1.5</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>xjc</goal>
+						</goals>
+						<configuration>
+							<!-- The name of your generated source package -->
+							<outputDirectory>src/main/java</outputDirectory>
+							<packageName>${model.package}</packageName>
+							<schemaDirectory>${schema.dir}</schemaDirectory>
+							<schemaFiles>*.xsd</schemaFiles>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+		</plugins>
+	</build>
 </project>
