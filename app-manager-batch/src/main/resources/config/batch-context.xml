@@ -2,8 +2,10 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd">
 
 	<!-- Root Context: defines shared resources visible to all other web components -->										
 	<import resource="persistence.xml"/>
@@ -21,5 +23,17 @@
 	<bean id="jobLauncher" class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
 		<property name="jobRepository" ref="jobRepository" />
 	</bean>
+	
+	<!-- Aspects -->
+	<bean id="aspectUtil" class="com.ds.appmanager.batch.util.AspectUtil" />
+	
+	<!-- Logging -->
+	<aop:config>
+		<aop:pointcut expression="execution(* com.ds.appmanager.batch.*.*.*(..))" id="allMethods"/>
+		<aop:aspect ref="aspectUtil">
+			<aop:around method="logMethodEntryAndExit" pointcut-ref="allMethods"/>
+			<aop:after-throwing method="logAfterException" pointcut-ref="allMethods" throwing="error"/>
+		</aop:aspect>
+	</aop:config>
 	
 </beans>
