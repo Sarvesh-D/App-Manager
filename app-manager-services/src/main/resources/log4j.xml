@@ -14,7 +14,7 @@
 	    <param name="append" value="false" />
 	    <param name="maxFileSize" value="10MB" />
 	    <param name="maxBackupIndex" value="10" />
-	    <param name="file" value="C:\\Users\\Sarvesh\\Desktop\\serviceLogs.txt" />
+	    <param name="file" value="C:\\Users\\Sarvesh Dubey\\Desktop\\serviceLogs.txt" />
 	    <layout class="org.apache.log4j.PatternLayout">
 		<param name="ConversionPattern" 
 			value="%d{dd-MM-yyyy HH:mm:ss} %-5p %c{1}:%L - %m%n" />
@@ -25,7 +25,7 @@
 	    <param name="append" value="false" />
 	    <param name="maxFileSize" value="10MB" />
 	    <param name="maxBackupIndex" value="10" />
-	    <param name="file" value="C:\\Users\\Sarvesh\\Desktop\\serviceErrorLogs.txt" />
+	    <param name="file" value="C:\\Users\\Sarvesh Dubey\\Desktop\\serviceErrorLogs.txt" />
 	    <layout class="org.apache.log4j.PatternLayout">
 		<param name="ConversionPattern" 
 			value="%d{dd-MM-yyyy HH:mm:ss} %-5p %c{1}:%L - %m%n" />

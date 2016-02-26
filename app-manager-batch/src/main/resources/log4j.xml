@@ -14,7 +14,7 @@
 	    <param name="append" value="false" />
 	    <param name="maxFileSize" value="10MB" />
 	    <param name="maxBackupIndex" value="10" />
-	    <param name="file" value="C:\\Users\\Sarvesh\\Desktop\\batchLogs.txt" />
+	    <param name="file" value="C:\\Users\\Sarvesh Dubey\\Desktop\\batchLogs.txt" />
 	    <layout class="org.apache.log4j.PatternLayout">
 		<param name="ConversionPattern" 
 			value="%d{dd-MM-yyyy HH:mm:ss} %-5p %c{1}:%L - %m%n" />
@@ -25,7 +25,7 @@
 	    <param name="append" value="false" />
 	    <param name="maxFileSize" value="10MB" />
 	    <param name="maxBackupIndex" value="10" />
-	    <param name="file" value="C:\\Users\\Sarvesh\\Desktop\\batchErrorLogs.txt" />
+	    <param name="file" value="C:\\Users\\Sarvesh Dubey\\Desktop\\batchErrorLogs.txt" />
 	    <layout class="org.apache.log4j.PatternLayout">
 		<param name="ConversionPattern" 
 			value="%d{dd-MM-yyyy HH:mm:ss} %-5p %c{1}:%L - %m%n" />
