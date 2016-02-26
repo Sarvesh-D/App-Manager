@@ -17,7 +17,7 @@
 	<build>
 		<plugins>
 			<!-- Plugin required to build java classes from XSD using XJC -->
-			<plugin>
+			<!-- <plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>jaxb2-maven-plugin</artifactId>
 				<version>1.5</version>
@@ -27,15 +27,16 @@
 							<goal>xjc</goal>
 						</goals>
 						<configuration>
-							<!-- The name of your generated source package -->
+							The name of your generated source package
 							<outputDirectory>src/main/java</outputDirectory>
 							<packageName>${model.package}</packageName>
 							<schemaDirectory>${schema.dir}</schemaDirectory>
 							<schemaFiles>*.xsd</schemaFiles>
+							<clearOutputDir>false</clearOutputDir>
 						</configuration>
 					</execution>
 				</executions>
-			</plugin>
+			</plugin> -->
 
 		</plugins>
 	</build>

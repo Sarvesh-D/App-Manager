@@ -23,7 +23,7 @@ public class ItemValidator implements BaseValidator<ApplicationView> {
 		if(null == obj.getApplicationLaunch()) {
 			getErrors().add("Launch Date is mandatory");
 		}
-		if(obj.getApplicationLaunch().toGregorianCalendar().getTime().after(new Date())) {
+		if(obj.getApplicationLaunch().after(new Date())) {
 			getErrors().add("Launch Date cannot be future date");
 		}
 		return getErrors().isEmpty();
