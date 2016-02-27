@@ -80,6 +80,16 @@ public class ApplicationController {
 		applicationService.deleteApplication(applicationId);
 	}
 	
+	/**
+	 * Map users to applications
+	 * @param applicationId
+	 * @param userIds
+	 */
+	@RequestMapping(value="/app/users" , method=RequestMethod.PUT)
+	public @ResponseBody void mapApplicationToUsers(@RequestBody ApplicationView applicationView) {
+		applicationService.mapApplicationToUsers(applicationView.getApplicationId(), applicationView.getUsers());
+	}
+	
 	// TODO FOR TESTING ERROR.JSP NOT RENDERING ISSUE
 	/*@RequestMapping(value="/get")
 	public String getAllApplications() throws ApplicationException {

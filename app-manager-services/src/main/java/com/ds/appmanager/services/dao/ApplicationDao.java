@@ -6,6 +6,7 @@ package com.ds.appmanager.services.dao;
 import java.util.List;
 
 import com.ds.appmanager.services.domain.Application;
+import com.ds.appmanager.services.domain.User;
 import com.ds.appmanager.services.exceptions.ApplicationException;
 
 /**
@@ -42,5 +43,7 @@ public interface ApplicationDao {
 	List<Application> getAllApplications();
 	
 	Application getApplication(int applicationId);
+
+	boolean mapApplicationToUsers(int applicationId, List<User> users);
 
 }

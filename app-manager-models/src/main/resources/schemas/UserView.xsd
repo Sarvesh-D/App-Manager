@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/UserView"
+	xmlns:tns="http://www.example.org/UserView" elementFormDefault="qualified">
+
+	<element name="UserView">
+		<complexType>
+			<sequence>
+				<element name="userId" type="int" />
+				<element name="userName" type="string" />
+			</sequence>
+		</complexType>
+	</element>
+
+
+</schema>

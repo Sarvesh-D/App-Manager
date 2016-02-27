@@ -11,3 +11,21 @@ appModuleServices.factory('appManagerServices' , function($resource) {
 				}
 			});
 });
+
+appModuleServices.factory('userManagerServices' , function($resource) {
+	return $resource('http://localhost:8081/app-manager-services/users/:user',{},
+			{
+				update: {
+					method:'PUT'
+				}
+			});
+});
+
+appModuleServices.factory('userAppMappingServices' , function($resource) {
+	return $resource('http://localhost:8081/app-manager-services/app/users',{},
+			{
+				update: {
+					method:'PUT'
+				}
+			});
+});

@@ -1,0 +1,48 @@
+<div class="panel panel-primary" ng-init="init()">
+	<div class="panel-heading">Map Applications Form</div>
+		<div class="panel-body">
+			<form name="mapAppForm" novalidate ng-model-options="{updateOn: 'blur'}" role="form">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-4">
+								<label for="applicationName">Application Names</label>
+							</div>
+							<div class="col-md-4">
+								<select ng-options="app.id as app.name for app in applications" ng-model="map.application"></select>
+							</div>
+						</div> <br>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="row">
+							<div class="col-md-4">
+								<label for="applicationName">User Names</label>
+							</div>
+							<div class="col-md-4">
+								<select multiple="multiple" ng-options="user as user.userName for user in users" ng-model="map.users"></select>	
+							</div>
+						</div> <br>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="row">
+							<div class="col-md-2">
+								<input  type="button"  value="Back" ng-click="back()" class="btn btn-primary"/>
+							</div>
+							<div class="col-md-2">
+								<input  type="button"  value="Map" ng-click="mapAppToUsers(map)" class="btn btn-primary"/>
+							</div>
+						</div>
+					</div>
+				</div> <br>
+				<div ng-if="appsMappedSucessfully">
+					<div class="alert alert-success">
+  						<strong>Success!</strong> Application Mapped
+					</div>
+				</div>
+			</form>
+		</div>
+</div>

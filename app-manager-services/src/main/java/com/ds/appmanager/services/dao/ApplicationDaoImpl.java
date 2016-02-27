@@ -10,6 +10,7 @@ import org.springframework.orm.hibernate3.HibernateTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.ds.appmanager.services.domain.Application;
+import com.ds.appmanager.services.domain.User;
 
 
 /**
@@ -63,6 +64,15 @@ public class ApplicationDaoImpl implements ApplicationDao {
 	@Override
 	public Application getApplication(int applicationId) {
 		return hibernateTemplate.get(Application.class, applicationId);
+	}
+
+	@Override
+	public boolean mapApplicationToUsers(int applicationId, List<User> users) {
+		final Application application = getApplication(applicationId); 
+		for (User user : users) {
+			hibernateTemplate.get(User.class, user.getUserId()).setApplication(application);;
+		}
+		return true;
 	}
 
 }

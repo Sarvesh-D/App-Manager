@@ -9,6 +9,7 @@
 package com.ds.appmanager.model;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -62,6 +63,8 @@ public class ApplicationView {
     @XmlSchemaType(name = "date")
     protected Date applicationLaunch;
     protected boolean live;
+    
+    protected List<UserView> users;
 
     /**
      * Gets the value of the applicationId property.
@@ -166,5 +169,15 @@ public class ApplicationView {
     public void setLive(boolean value) {
         this.live = value;
     }
+
+	public List<UserView> getUsers() {
+		return users;
+	}
+
+	public void setUsers(List<UserView> users) {
+		this.users = users;
+	}
+    
+    
 
 }

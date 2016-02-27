@@ -12,5 +12,9 @@ appModule.config(function($routeProvider) {
 		when('/home/:user', {
 			templateUrl: "html/home.html",
 			controller: "applicationController"
+		}).
+		when('/map', {
+			templateUrl: "html/map.html",
+			controller: "appMapController"
 		});
 });

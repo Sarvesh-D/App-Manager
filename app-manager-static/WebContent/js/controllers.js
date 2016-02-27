@@ -2,11 +2,11 @@
  * JS for controllers 
  */
 
-appModule.controller('applicationController' , function($scope,$http,$routeParams,$uibModal,appManagerServices) {
+appModule.controller('applicationController' , function($scope,$rootScope,$http,$routeParams,$uibModal,$window,appManagerServices) {
 	$scope.app = {};
 	$scope.applications = [];
 	
-	$scope.loggedUser = $routeParams.user;
+	$rootScope.loggedUser = $routeParams.user;
 	
 	$scope.clear = function(form) {
 		$scope.app = {};
@@ -78,12 +78,17 @@ appModule.controller('applicationController' , function($scope,$http,$routeParam
 			}
 		})
 	}
+	
+	$scope.doMap = function() {
+		$window.location.href = '#map/';
+	}
+		
 });
 
 appModule.controller('loginController', function($scope,$window) {
 	
 	$scope.login = function(userName,password) {
-		if(userName === 'root' && password === 'root') {
+		if(password === 'root') {
 			alert('Welcome');
 			$window.location.href = "#home/"+userName;
 		} else {
@@ -116,5 +121,43 @@ appModule.controller('deleteController', function($scope,$uibModalInstance,appMa
 	}
 	$scope.cancel = function() {
 		$uibModalInstance.dismiss();
+	}
+});
+
+appModule.controller('appMapController', function($scope,$rootScope,$window,appManagerServices,userManagerServices,userAppMappingServices) {
+	$scope.init = function() {
+		// load apps
+		var apps = appManagerServices.query(function() {
+			$scope.applications = [];
+			angular.forEach(apps,function(app) {
+				var uiApp = configRespAppObj(app);
+				$scope.applications.push(uiApp);
+			});
+		});
+		
+		// load users
+		var users = userManagerServices.query(function() {
+			$scope.users = [];
+			angular.forEach(users,function(user) {
+				var uiUser = configRespUserObj(user);
+				$scope.users.push(uiUser);
+			});
+		});
+	}
+	
+	
+	$scope.mapAppToUsers = function(appUsersMap) {
+		console.log(appUsersMap);
+		// UPDATE each user
+		var reqObj = {
+				'applicationId':appUsersMap.application,
+				'users':appUsersMap.users
+		}
+		userAppMappingServices.update(reqObj);
+		$scope.appsMappedSucessfully = true;
+	}
+	
+	$scope.back = function() {
+		$window.location.href = "#home/"+$rootScope.loggedUser;
 	}
 });

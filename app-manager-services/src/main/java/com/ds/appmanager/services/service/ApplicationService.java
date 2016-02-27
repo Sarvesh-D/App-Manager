@@ -6,6 +6,7 @@ package com.ds.appmanager.services.service;
 import java.util.List;
 
 import com.ds.appmanager.model.ApplicationView;
+import com.ds.appmanager.model.UserView;
 
 /**
  * Interface that provides the functionality of Application_Management_System
@@ -38,5 +39,7 @@ public interface ApplicationService {
 	List<ApplicationView> getAllApplications();
 	
 	ApplicationView getApplication(int applicationId);
+	
+	boolean mapApplicationToUsers(int applicationId, List<UserView> userViews);
 
 }

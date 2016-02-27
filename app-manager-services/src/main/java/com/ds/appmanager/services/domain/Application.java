@@ -1,5 +1,6 @@
 package com.ds.appmanager.services.domain;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -7,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -29,6 +31,9 @@ public class Application {
 	
 	@Column(name="LIVE")
 	private boolean live;
+	
+	@OneToMany(mappedBy="application")
+	private Collection<User> users;
 	
 	public Application() {
 	}
@@ -81,6 +86,14 @@ public class Application {
 
 	public void setLive(boolean live) {
 		this.live = live;
+	}
+	
+	public Collection<User> getUsers() {
+		return users;
+	}
+
+	public void setUsers(Collection<User> users) {
+		this.users = users;
 	}
 
 	@Override

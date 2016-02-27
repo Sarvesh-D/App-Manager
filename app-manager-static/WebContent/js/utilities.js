@@ -31,6 +31,14 @@ function configRespAppObj(app) {
 	return uiApp;
 }
 
+function configRespUserObj(user) {
+	var uiUser = {
+			userId : user.userId,
+			userName : user.userName, 
+	};
+	return uiUser;
+}
+
 function configAppForUI(app) {
 	if(null == app.live) {
 		app.live = false;

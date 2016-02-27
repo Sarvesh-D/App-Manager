@@ -14,8 +14,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.ds.appmanager.model.ApplicationView;
+import com.ds.appmanager.model.UserView;
 import com.ds.appmanager.services.dao.ApplicationDao;
 import com.ds.appmanager.services.domain.Application;
+import com.ds.appmanager.services.domain.User;
 
 /**
  * @author Sarvesh
@@ -71,6 +73,15 @@ public class ApplicationServiceImpl implements ApplicationService {
 		} else {
 			return null;
 		}
+	}
+
+	@Override
+	public boolean mapApplicationToUsers(int applicationId, List<UserView> userViews) {
+		List<User> users = new ArrayList<>();
+		for (UserView userView : userViews) {
+			users.add(mapper.map(userView,User.class));
+		}
+		return applicationDao.mapApplicationToUsers(applicationId, users);
 	}
 
 }

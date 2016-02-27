@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/ApplicationView"
-	xmlns:tns="http://www.example.org/ApplicationView" elementFormDefault="qualified">
+	xmlns:tns="http://www.example.org/ApplicationView" elementFormDefault="qualified"
+	xmlns:user="http://www.example.org/UserView">
+	
+	<import schemaLocation="UserView.xsd" namespace="http://www.example.org/UserView"></import>
 
 	<element name="ApplicationView">
 		<complexType>
@@ -10,6 +13,7 @@
 				<element name="applicationDesc" type="string" />
 				<element name="applicationLaunch" type="date" />
 				<element name="live" type="boolean" />
+				<!-- <element name="users" type="user:UserView" ></element> -->
 			</sequence>
 		</complexType>
 	</element>
