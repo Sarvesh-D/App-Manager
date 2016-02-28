@@ -29,3 +29,21 @@ appModuleServices.factory('userAppMappingServices' , function($resource) {
 				}
 			});
 });
+
+appModuleServices.factory('userLoginServices' , function($resource) {
+	return $resource('http://localhost:8081/app-manager-services/login',{},
+			{
+				update: {
+					method:'PUT'
+				}
+			});
+});
+
+appModuleServices.factory('auditServices' , function($resource) {
+	return $resource('http://localhost:8081/app-manager-services/audit/:appId',{},
+			{
+				update: {
+					method:'PUT'
+				}
+			});
+});

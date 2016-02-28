@@ -7,11 +7,13 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ds.appmanager.model.UserView;
+import com.ds.appmanager.services.domain.User;
 import com.ds.appmanager.services.exceptions.ApplicationException;
 import com.ds.appmanager.services.service.UserService;
 
@@ -32,6 +34,11 @@ public class UserController {
 	@RequestMapping(value="/users" , method=RequestMethod.GET)
 	public @ResponseBody List<UserView> getAllUsers() throws ApplicationException {
 		return userService.getAllUsers();
+	}
+	
+	@RequestMapping(value="/login" , method=RequestMethod.POST)
+	public void doLogin(@RequestBody User user) throws ApplicationException {
+		userService.setLoggedInUser(user);
 	}
 
 }

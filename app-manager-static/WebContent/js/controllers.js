@@ -2,11 +2,9 @@
  * JS for controllers 
  */
 
-appModule.controller('applicationController' , function($scope,$rootScope,$http,$routeParams,$uibModal,$window,appManagerServices) {
+appModule.controller('applicationController' , function($scope,$rootScope,$http,$uibModal,$window,appManagerServices,auditServices) {
 	$scope.app = {};
 	$scope.applications = [];
-	
-	$rootScope.loggedUser = $routeParams.user;
 	
 	$scope.clear = function(form) {
 		$scope.app = {};
@@ -82,15 +80,36 @@ appModule.controller('applicationController' , function($scope,$rootScope,$http,
 	$scope.doMap = function() {
 		$window.location.href = '#map/';
 	}
+	
+	$scope.getAudit = function(applicationId) {
+		if(null != applicationId) {
+			var appRevisions = auditServices.query({appId:applicationId} , function(res) {
+				$scope.applications = [];
+				$scope.noApp = false;
+				angular.forEach(appRevisions,function(appRevision) {
+					var uiApp = configRespAppObj(appRevision);
+					$scope.applications.push(uiApp);
+				});
+			}
+			);
+		} else {
+			alert('Enter Application ID');
+		}
+	};
 		
 });
 
-appModule.controller('loginController', function($scope,$window) {
+appModule.controller('loginController', function($scope,$window,$rootScope,userLoginServices) {
 	
-	$scope.login = function(userName,password) {
-		if(password === 'root') {
+	$scope.login = function(user) {
+		if(user.password === 'root') {
 			alert('Welcome');
-			$window.location.href = "#home/"+userName;
+			$rootScope.loggedUser = user.userName;
+			var reqObj = {
+					'userName': user.userName 
+			}
+			userLoginServices.save(reqObj);
+			$window.location.href = "#home/"+user.userName;
 		} else {
 			alert('Invalid user');
 		}

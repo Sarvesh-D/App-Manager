@@ -10,7 +10,7 @@
 	<bean id="aspectUtil" class="com.ds.appmanager.services.util.AspectUtil" />
 
 	<aop:config>
-		<aop:pointcut expression="execution(* com.ds.appmanager.services.service.*.*(..))" id="allServiceMethods"/>
+		<aop:pointcut expression="execution(* com.ds.appmanager.services.service..*.*(..))" id="allServiceMethods"/>
 		<aop:pointcut expression="execution(* com.ds.appmanager.services.*.*(..))" id="allMethods"/>
 		<aop:advisor  advice-ref="txAdvice" pointcut-ref="allServiceMethods" />
 		<aop:aspect ref="aspectUtil">

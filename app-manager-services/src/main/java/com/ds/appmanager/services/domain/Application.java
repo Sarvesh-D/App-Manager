@@ -11,8 +11,12 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.envers.Audited;
+
+
 @Entity
 @Table(name="APPLICATION_DETAILS")
+@Audited
 public class Application {
 	
 	@Id

@@ -10,6 +10,8 @@
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
 	
+	<bean id="enversListener" class="org.hibernate.envers.event.AuditEventListener"/>
+	
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="packagesToScan" value="com.ds.appmanager.services.domain" />
@@ -20,6 +22,22 @@
 				hibernate.show_sql=true
 			</value>
 		</property>
+		<property name="eventListeners">
+			<map>
+				<entry key="post-insert" value-ref="enversListener">
+				</entry>
+				<entry key="post-update" value-ref="enversListener">
+				</entry>
+				<entry key="post-delete" value-ref="enversListener">
+				</entry>
+				<entry key="pre-collection-update" value-ref="enversListener">
+				</entry>
+				<entry key="pre-collection-remove" value-ref="enversListener">
+				</entry>
+				<entry key="post-collection-recreate" value-ref="enversListener">
+				</entry>
+			</map>
+		</property>	
 	</bean>
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">

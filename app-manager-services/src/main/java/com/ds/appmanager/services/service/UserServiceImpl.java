@@ -10,11 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.ds.appmanager.model.ApplicationView;
 import com.ds.appmanager.model.UserView;
 import com.ds.appmanager.services.dao.UserDao;
-import com.ds.appmanager.services.domain.Application;
 import com.ds.appmanager.services.domain.User;
+import com.ds.appmanager.services.util.UserContextHolder;
 
 @Service
 public class UserServiceImpl implements UserService {
@@ -25,7 +24,7 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private Mapper mapper;
-
+	
 	private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
 	@Override
@@ -38,6 +37,11 @@ public class UserServiceImpl implements UserService {
 			}
 		}
 		return allUsersList;
+	}
+
+	@Override
+	public void setLoggedInUser(User user) {
+		UserContextHolder.setUser(user);
 	}
 
 }
