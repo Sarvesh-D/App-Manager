@@ -12,6 +12,8 @@
 	
 	<bean id="enversListener" class="org.hibernate.envers.event.AuditEventListener"/>
 	
+	<bean id="auditInterceptor" class="com.ds.appmanager.services.dao.AuditInterceptor" />
+	
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="packagesToScan" value="com.ds.appmanager.services.domain" />
@@ -38,6 +40,8 @@
 				</entry>
 			</map>
 		</property>	
+		
+		<property name="entityInterceptor" ref="auditInterceptor" />
 	</bean>
 	
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
