@@ -4,6 +4,7 @@
 package com.ds.appmanager.services.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import com.ds.appmanager.services.domain.Application;
 import com.ds.appmanager.services.domain.User;
@@ -43,7 +44,5 @@ public interface ApplicationDao {
 	List<Application> getAllApplications();
 	
 	Application getApplication(int applicationId);
-
-	boolean mapApplicationToUsers(int applicationId, List<User> users);
 
 }

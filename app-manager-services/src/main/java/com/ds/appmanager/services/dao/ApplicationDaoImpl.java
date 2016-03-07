@@ -1,6 +1,7 @@
 package com.ds.appmanager.services.dao;
 
 import java.util.List;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +29,7 @@ public class ApplicationDaoImpl implements ApplicationDao {
 	@Override
 	public boolean addApplication(Application application) {
 		try {
+			addUsersToApplication(application, application.getUsers());
 			hibernateTemplate.save(application);
 			return true;
 		} catch (DataAccessException e) {
@@ -38,6 +40,7 @@ public class ApplicationDaoImpl implements ApplicationDao {
 	@Override
 	public boolean updateApplication(Application application) {
 		try {
+			addUsersToApplication(application, application.getUsers());
 			hibernateTemplate.update(application);
 			return true;
 		} catch (DataAccessException e) {
@@ -65,12 +68,13 @@ public class ApplicationDaoImpl implements ApplicationDao {
 	public Application getApplication(int applicationId) {
 		return hibernateTemplate.get(Application.class, applicationId);
 	}
-
-	@Override
-	public boolean mapApplicationToUsers(int applicationId, List<User> users) {
-		final Application application = getApplication(applicationId); 
-		for (User user : users) {
-			hibernateTemplate.get(User.class, user.getUserId()).setApplication(application);;
+	
+	private boolean addUsersToApplication(Application application, Set<User> users) {
+		if(null != users) {
+			application.setUsers(users);
+			for (User user : users) {
+				user.setApplication(application);;
+			}
 		}
 		return true;
 	}

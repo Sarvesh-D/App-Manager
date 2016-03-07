@@ -45,6 +45,14 @@
 											<input type="checkbox" id="isLive" ng-model="app.live" name="isLive"/>	
 										</div>
 									</div> <br>
+									<div class="row">
+										<div class="col-md-4">
+											<label>User Names</label>
+										</div>
+										<div class="col-md-4">
+											<select multiple="multiple" ng-options="user as user.userName for user in users" ng-model="app.users"></select>	
+										</div>
+									</div> <br>
 									
 									<div class="row">
 										<div class="col-md-6">

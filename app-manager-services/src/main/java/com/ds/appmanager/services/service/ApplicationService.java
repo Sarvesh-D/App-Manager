@@ -4,6 +4,7 @@
 package com.ds.appmanager.services.service;
 
 import java.util.List;
+import java.util.Set;
 
 import com.ds.appmanager.model.ApplicationView;
 import com.ds.appmanager.model.UserView;
@@ -40,6 +41,4 @@ public interface ApplicationService {
 	
 	ApplicationView getApplication(int applicationId);
 	
-	boolean mapApplicationToUsers(int applicationId, List<UserView> userViews);
-
 }

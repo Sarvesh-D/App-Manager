@@ -87,7 +87,7 @@ public class ApplicationController {
 	 */
 	@RequestMapping(value="/app/users" , method=RequestMethod.PUT)
 	public @ResponseBody void mapApplicationToUsers(@RequestBody ApplicationView applicationView) {
-		applicationService.mapApplicationToUsers(applicationView.getApplicationId(), applicationView.getUsers());
+		applicationService.updateApplication(applicationView);
 	}
 	
 	// TODO FOR TESTING ERROR.JSP NOT RENDERING ISSUE

@@ -15,7 +15,8 @@ function configReqAppObj(app) {
 			applicationName : app.name, 
 			applicationDesc : app.desc,
 			applicationLaunch : app.launch,
-			live : app.live
+			live : app.live,
+			users : app.users
 	};
 	return reqObj;
 }

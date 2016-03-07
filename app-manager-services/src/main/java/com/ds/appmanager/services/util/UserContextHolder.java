@@ -11,6 +11,8 @@ public class UserContextHolder {
 	private static User user;
 
 	public static User getUser() {
+		if(null == user)
+			user = new User("SYSTEM");
 		return user;
 	}
 

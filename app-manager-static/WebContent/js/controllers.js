@@ -2,9 +2,18 @@
  * JS for controllers 
  */
 
-appModule.controller('applicationController' , function($scope,$rootScope,$http,$uibModal,$window,appManagerServices,auditServices) {
+appModule.controller('applicationController' , function($scope,$rootScope,$http,$uibModal,$window,appManagerServices,userManagerServices,auditServices) {
 	$scope.app = {};
 	$scope.applications = [];
+	
+	// load users
+	var users = userManagerServices.query(function() {
+		$scope.users = [];
+		angular.forEach(users,function(user) {
+			var uiUser = configRespUserObj(user);
+			$scope.users.push(uiUser);
+		});
+	});
 	
 	$scope.clear = function(form) {
 		$scope.app = {};
@@ -117,12 +126,22 @@ appModule.controller('loginController', function($scope,$window,$rootScope,userL
 	
 });
 
-appModule.controller('updateController', function($scope,$uibModalInstance,appManagerServices,applicationId) {
+appModule.controller('updateController', function($scope,$uibModalInstance,appManagerServices,userManagerServices,applicationId) {
 	$scope.app = {};
 	// GET the application which needs to be updated
 	appManagerServices.get({app:applicationId},function(app) {
 		$scope.app = configRespAppObj(app);
 	});
+
+	// load users
+	var users = userManagerServices.query(function() {
+		$scope.users = [];
+		angular.forEach(users,function(user) {
+			var uiUser = configRespUserObj(user);
+			$scope.users.push(uiUser);
+		});
+	});
+	
 	// UPDATE the application
 	$scope.save = function(form) {
 		var reqObj = configReqAppObj(angular.copy($scope.app));

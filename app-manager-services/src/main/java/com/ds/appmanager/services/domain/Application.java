@@ -2,7 +2,9 @@ package com.ds.appmanager.services.domain;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -36,8 +38,8 @@ public class Application {
 	@Column(name="LIVE")
 	private boolean live;
 	
-	@OneToMany(mappedBy="application")
-	private Collection<User> users;
+	@OneToMany(cascade=CascadeType.ALL, mappedBy="application")
+	private Set<User> users;
 	
 	public Application() {
 	}
@@ -92,11 +94,11 @@ public class Application {
 		this.live = live;
 	}
 	
-	public Collection<User> getUsers() {
+	public Set<User> getUsers() {
 		return users;
 	}
 
-	public void setUsers(Collection<User> users) {
+	public void setUsers(Set<User> users) {
 		this.users = users;
 	}
 

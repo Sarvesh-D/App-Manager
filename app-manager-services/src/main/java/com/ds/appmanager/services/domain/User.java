@@ -28,6 +28,13 @@ public class User {
 	@ManyToOne
 	@JoinColumn(name="APPLICATION_ID")
 	private Application application;
+	
+	public User() {
+	}
+	
+	public User(String userName) {
+		this.userName = userName;
+	}
 
 	public Integer getUserId() {
 		return userId;

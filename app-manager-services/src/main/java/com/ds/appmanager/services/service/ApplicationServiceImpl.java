@@ -4,7 +4,9 @@
 package com.ds.appmanager.services.service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.dozer.Mapper;
 import org.slf4j.Logger;
@@ -73,15 +75,6 @@ public class ApplicationServiceImpl implements ApplicationService {
 		} else {
 			return null;
 		}
-	}
-
-	@Override
-	public boolean mapApplicationToUsers(int applicationId, List<UserView> userViews) {
-		List<User> users = new ArrayList<>();
-		for (UserView userView : userViews) {
-			users.add(mapper.map(userView,User.class));
-		}
-		return applicationDao.mapApplicationToUsers(applicationId, users);
 	}
 
 }
